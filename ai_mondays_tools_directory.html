@@ -1,0 +1,217 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Mondays — Tools Directory</title>
+<link rel="stylesheet" href="tokens.css">
+</head>
+<body>
+<h2 class="sr-only">AI Mondays tools directory mockup — Craigslist-style layout showing states, chapters, categories, and tool listings</h2>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.page { background: var(--color-background-primary); overflow: hidden; }
+.topbar { background: var(--color-background-secondary); border-bottom: 0.5px solid var(--color-border-tertiary); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+.topbar-logo { text-decoration: none; display: inline-flex; align-items: center; }
+.topbar-logo-img { height: 48px; width: auto; display: block; }
+.topbar-nav { display: flex; gap: 8px; }
+.topbar-nav a { font-size: 15px; font-weight: 500; color: #FF1493; text-decoration: none; padding: 8px 14px; }
+.topbar-nav a:hover { color: #FF6EB4; }
+.topbar-search { display: flex; gap: 6px; align-items: center; }
+.topbar-search input { font-size: 12px; padding: 4px 8px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); width: 160px; }
+.topbar-search button { font-size: 11px; padding: 4px 10px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); cursor: pointer; }
+.layout { display: grid; grid-template-columns: 200px 1fr; min-height: 520px; }
+.sidebar { border-right: 0.5px solid var(--color-border-tertiary); padding: 14px 0; background: var(--color-background-secondary); }
+.sidebar-section { margin-bottom: 6px; }
+.sidebar-state { font-size: 12px; font-weight: 500; color: var(--color-text-primary); padding: 6px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+.sidebar-state .arrow { font-size: 10px; color: var(--color-text-tertiary); }
+.sidebar-chapter { font-size: 12px; color: #FF1493; padding: 4px 14px 4px 24px; cursor: pointer; display: block; text-decoration: none; }
+.sidebar-chapter:hover { background: var(--color-background-primary); }
+.sidebar-chapter.active { background: var(--color-background-primary); color: #0C447C; font-weight: 500; border-left: 2px solid #FF1493; padding-left: 22px; }
+.sidebar-divider { height: 0.5px; background: var(--color-border-tertiary); margin: 8px 0; }
+.main { padding: 16px 20px; }
+.breadcrumb { font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 12px; }
+.breadcrumb span { color: #FF1493; }
+.chapter-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+.chapter-title { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+.chapter-badge { font-size: 10px; padding: 2px 8px; background: #E6F1FB; color: #0C447C; border-radius: 10px; }
+.chapter-meta { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 16px; }
+.categories-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.category { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); overflow: hidden; }
+.cat-header { padding: 7px 10px; background: var(--color-background-secondary); border-bottom: 0.5px solid var(--color-border-tertiary); }
+.cat-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+.cat-count { font-size: 10px; color: var(--color-text-tertiary); }
+.tool-list { padding: 6px 0; }
+.tool-item { padding: 5px 10px; display: flex; flex-direction: column; gap: 1px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.tool-item:last-child { border-bottom: none; }
+.tool-name { font-size: 12px; color: #FF1493; text-decoration: none; cursor: pointer; }
+.tool-name:hover { text-decoration: underline; }
+.tool-meta { font-size: 10px; color: var(--color-text-tertiary); }
+.tool-tag { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 3px; margin-top: 2px; }
+.tag-free { background: #EAF3DE; color: #3B6D11; }
+.tag-paid { background: #FAEEDA; color: #854F0B; }
+.tag-new { background: #E6F1FB; color: #FF1493; }
+.footer-bar { border-top: 0.5px solid var(--color-border-tertiary); padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; background: var(--color-background-secondary); }
+.footer-bar span { font-size: 11px; color: var(--color-text-tertiary); }
+.footer-bar a { font-size: 11px; color: #FF1493; text-decoration: none; }
+</style>
+
+<div class="page">
+  <div class="topbar">
+    <a class="topbar-logo" href="ai_mondays_homepage_v2.html"><img class="topbar-logo-img" src="ai-mondays-7538112.webp" alt="AI Mondays"></a>
+    <div class="topbar-search">
+      <input type="text" placeholder="search tools..." />
+      <button>search</button>
+    </div>
+    <div class="topbar-nav">
+      <a href="ai_mondays_homepage_v2.html">home</a>
+      <a href="#">events</a>
+      <a href="ai_mondays_directory_v2.html">chapters</a>
+      <a href="ai_mondays_tools_directory.html">tools</a>
+      <a href="ai_mondays_teachers_directory.html">teachers</a>
+      <a href="#">join</a>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-state">Utah <span class="arrow">▼</span></div>
+        <a class="sidebar-chapter" href="#">Salt Lake City</a>
+        <a class="sidebar-chapter active" href="#">Provo / Orem</a>
+        <a class="sidebar-chapter" href="#">Logan</a>
+        <a class="sidebar-chapter" href="#">Ogden</a>
+        <a class="sidebar-chapter" href="#">St. George</a>
+        <a class="sidebar-chapter" href="#">Lehi</a>
+        <a class="sidebar-chapter" href="#">Draper</a>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">
+        <div class="sidebar-state">California <span class="arrow">▼</span></div>
+        <a class="sidebar-chapter" href="#">Sacramento</a>
+        <a class="sidebar-chapter" href="#">San Francisco</a>
+        <a class="sidebar-chapter" href="#">Los Angeles</a>
+        <a class="sidebar-chapter" href="#">San Diego</a>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">
+        <div class="sidebar-state">Texas <span class="arrow">▶</span></div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-state">Florida <span class="arrow">▶</span></div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-state">New York <span class="arrow">▶</span></div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="breadcrumb">tools &rsaquo; <span>Utah</span> &rsaquo; <span>Provo / Orem</span></div>
+      <div class="chapter-header">
+        <div class="chapter-title">Provo / Orem chapter</div>
+        <div class="chapter-badge">BYU &amp; UVU area</div>
+      </div>
+      <div class="chapter-meta">47 tools listed &nbsp;&middot;&nbsp; updated weekly &nbsp;&middot;&nbsp; chapter leader: Jake R.</div>
+
+      <div class="categories-grid">
+        <div class="category">
+          <div class="cat-header">
+            <div class="cat-title">Beginner</div>
+            <div class="cat-count">12 tools</div>
+          </div>
+          <div class="tool-list">
+            <div class="tool-item">
+              <a class="tool-name" href="#">AIMasters Tool</a>
+              <div class="tool-meta">ai writing assistant</div>
+              <span class="tool-tag tag-free">free</span>
+            </div>
+            <div class="tool-item">
+              <a class="tool-name" href="#">ChatBase Pro</a>
+              <div class="tool-meta">chatbot builder</div>
+              <span class="tool-tag tag-new">new</span>
+            </div>
+            <div class="tool-item">
+              <a class="tool-name" href="#">PromptLab Starter</a>
+              <div class="tool-meta">prompt engineering</div>
+              <span class="tool-tag tag-free">free</span>
+            </div>
+            <div class="tool-item">
+              <a class="tool-name" href="#">+ 9 more...</a>
+              <div class="tool-meta"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="cat-header">
+            <div class="cat-title">Intermediate</div>
+            <div class="cat-count">18 tools</div>
+          </div>
+          <div class="tool-list">
+            <div class="tool-item">
+              <a class="tool-name" href="#">FlowiseAI Builder</a>
+              <div class="tool-meta">no-code ai workflows</div>
+              <span class="tool-tag tag-paid">paid</span>
+            </div>
+            <div class="tool-item">
+              <a class="tool-name" href="#">Dify Platform</a>
+              <div class="tool-meta">llm app builder</div>
+              <span class="tool-tag tag-free">free</span>
+            </div>
+            <div class="tool-item">
+              <a class="tool-name" href="#">Make + AI Suite</a>
+              <div class="tool-meta">automation + ai</div>
+              <span class="tool-tag tag-paid">paid</span>
+            </div>
+            <div class="tool-item">
+              <a class="tool-name" href="#">+ 15 more...</a>
+              <div class="tool-meta"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="cat-header">
+            <div class="cat-title">Advanced</div>
+            <div class="cat-count">17 tools</div>
+          </div>
+          <div class="tool-list">
+            <div class="tool-item">
+              <a class="tool-name" href="#">LangChain Studio</a>
+              <div class="tool-meta">agent development</div>
+              <span class="tool-tag tag-free">free</span>
+            </div>
+            <div class="tool-item">
+              <a class="tool-name" href="#">CrewAI Enterprise</a>
+              <div class="tool-meta">multi-agent systems</div>
+              <span class="tool-tag tag-paid">paid</span>
+            </div>
+            <div class="tool-item">
+              <a class="tool-name" href="#">FineTune Pro</a>
+              <div class="tool-meta">model fine-tuning</div>
+              <span class="tool-tag tag-new">new</span>
+            </div>
+            <div class="tool-item">
+              <a class="tool-name" href="#">+ 14 more...</a>
+              <div class="tool-meta"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>AI Mondays &copy; 2025 &nbsp;&middot;&nbsp; "learn AI Monday, use it Tuesday"</span>
+    <div style="display:flex;gap:14px;">
+      <a href="#">advertise a tool</a>
+      <a href="#">become a chapter leader</a>
+      <a href="#">contact</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

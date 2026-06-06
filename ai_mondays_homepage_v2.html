@@ -1,0 +1,343 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Mondays — Home</title>
+<link rel="stylesheet" href="tokens.css">
+</head>
+<body>
+<h2 class="sr-only">AI Mondays homepage with US map showing Utah chapter locations, hero section, stats, features, and footer</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:linear-gradient(rgba(10,10,12,0.65),rgba(10,10,12,0.65)),url('stockphoto.png') center center / cover no-repeat fixed;background-color:var(--color-background-primary);}
+.page{background:transparent;overflow:hidden;font-family:var(--font-sans);min-height:100vh;display:flex;flex-direction:column;}
+.nav{background:rgba(26,26,29,0.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:0.5px solid var(--color-border-tertiary);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{text-decoration:none;display:inline-flex;align-items:center;}
+.nav-logo-img{height:56px;width:auto;display:block;}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-link{font-size:15px;font-weight:500;color:var(--color-text-secondary);padding:10px 18px;cursor:pointer;text-decoration:none;border-bottom:2px solid transparent;}
+.nav-link:hover{color:var(--color-text-primary);}
+.nav-link.active{color:#FF1493;border-bottom:2px solid #FF1493;}
+.nav-right{display:flex;gap:8px;align-items:center;}
+.btn-secondary{font-size:12px;padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);cursor:pointer;}
+.btn-primary{font-size:12px;padding:6px 14px;border:0.5px solid #FF1493;border-radius:var(--border-radius-md);background:#FF1493;color:white;cursor:pointer;}
+
+.hero{padding:80px 24px 72px;text-align:center;background:transparent;}
+.hero-eyebrow{font-size:13px;color:#FF1493;text-transform:uppercase;letter-spacing:.15em;margin-bottom:20px;font-weight:600;}
+.hero-title{font-size:56px;font-weight:700;letter-spacing:-0.02em;color:var(--color-text-primary);line-height:1.1;margin-bottom:20px;max-width:780px;margin-left:auto;margin-right:auto;}
+.hero-title span{color:#FF1493;}
+.hero-sub{font-size:18px;color:var(--color-text-secondary);line-height:1.6;max-width:620px;margin:0 auto 32px;}
+.hero-slogan{font-size:12px;color:var(--color-text-tertiary);font-style:italic;margin-bottom:20px;}
+.hero-search{display:flex;gap:8px;max-width:400px;margin:0 auto 18px;}
+.hero-search input{flex:1;font-size:13px;padding:8px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);}
+.hero-search button{font-size:12px;padding:8px 16px;border:none;border-radius:var(--border-radius-md);background:#FF1493;color:white;cursor:pointer;}
+.hero-btns-row1{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:8px;}
+.hero-btns-row2{display:flex;justify-content:center;}
+.hbtn-main{font-size:12px;padding:9px 20px;border:none;border-radius:var(--border-radius-md);background:#FF1493;color:white;cursor:pointer;font-weight:500;}
+.hbtn-sec{font-size:12px;padding:9px 20px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);cursor:pointer;}
+.hbtn-leader{font-size:12px;padding:9px 24px;border:0.5px solid #FF1493;border-radius:var(--border-radius-md);background:#FCE7F3;color:#FF1493;cursor:pointer;font-weight:500;}
+.hbtn-join{font-size:17px;padding:15px 48px;border:none;border-radius:var(--border-radius-md);background:#FF1493;color:white;cursor:pointer;font-weight:600;letter-spacing:.01em;box-shadow:0 6px 22px rgba(255,20,147,0.38);}
+.hbtn-join:hover{background:#FF6EB4;}
+
+.map-section{padding:72px 24px;background:var(--color-background-primary);border-top:0.5px solid var(--color-border-tertiary);border-bottom:0.5px solid var(--color-border-tertiary);}
+.map-header{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:36px;text-align:center;}
+.map-title{font-size:28px;font-weight:700;letter-spacing:-0.01em;color:var(--color-text-primary);}
+.map-legend{display:flex;gap:16px;align-items:center;}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary);}
+.legend-dot{width:10px;height:10px;border-radius:50%;}
+.dot-purple{background:#FF1493;}
+.dot-green{background:#1D9E75;}
+.map-wrap{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);overflow:hidden;}
+
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);}
+.stat-cell{padding:16px 24px;text-align:center;border-right:0.5px solid var(--color-border-tertiary);}
+.stat-cell:last-child{border-right:none;}
+.stat-num{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px;}
+.stat-lbl{font-size:11px;color:var(--color-text-secondary);}
+
+.section{padding:72px 24px;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);}
+.section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;}
+.section-title{font-size:28px;font-weight:700;letter-spacing:-0.01em;color:var(--color-text-primary);}
+.section-sub{font-size:14px;color:var(--color-text-secondary);margin-top:6px;}
+.section-link{font-size:12px;color:#FF1493;text-decoration:none;cursor:pointer;}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.feature-card{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px;}
+.feature-icon{width:32px;height:32px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.fi-blue{background:#FCE7F3;} .fi-teal{background:#E1F5EE;} .fi-purple{background:#FCE7F3;} .fi-amber{background:#FAEEDA;} .fi-green{background:#EAF3DE;} .fi-coral{background:#FAECE7;}
+.feature-name{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;}
+.feature-desc{font-size:11px;color:var(--color-text-secondary);line-height:1.6;}
+.feature-link{font-size:10px;color:#FF1493;margin-top:6px;display:block;cursor:pointer;}
+
+.chapter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.chapter-card{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px;}
+.ch-state{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+.ch-city{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px;}
+.ch-count{font-size:10px;color:var(--color-text-secondary);}
+.ch-badge{font-size:9px;padding:2px 6px;border-radius:3px;display:inline-block;margin-top:4px;}
+.ch-founder{background:#FCE7F3;color:#FF1493;}
+.ch-open{background:#EAF3DE;color:#3B6D11;}
+
+.teacher-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.mini-teacher{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px;display:flex;gap:10px;align-items:center;}
+.mini-av{width:36px;height:36px;border-radius:50%;flex-shrink:0;}
+.mini-name{font-size:12px;font-weight:500;color:var(--color-text-primary);}
+.mini-spec{font-size:10px;color:var(--color-text-secondary);}
+.mini-stars{font-size:10px;color:#EF9F27;margin-top:2px;}
+
+.tool-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.mini-tool{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px;display:flex;gap:10px;align-items:center;}
+.tool-ico{width:30px;height:30px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mini-tool-name{font-size:12px;font-weight:500;color:#FF1493;cursor:pointer;}
+.mini-tool-cat{font-size:10px;color:var(--color-text-secondary);}
+.mini-tool-stars{font-size:10px;color:#EF9F27;margin-top:1px;}
+
+.cta-band{background:#2d1822;border-top:0.5px solid #4a2f3e;border-bottom:0.5px solid #4a2f3e;padding:56px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:auto;}
+.cta-title{font-size:24px;font-weight:700;letter-spacing:-0.01em;color:#fbd5e6;margin-bottom:6px;}
+.cta-sub{font-size:14px;color:#db8aaf;}
+.cta-actions{display:flex;gap:8px;flex-shrink:0;}
+.cta-btn-main{font-size:12px;padding:8px 18px;border:none;border-radius:var(--border-radius-md);background:#FF1493;color:white;cursor:pointer;}
+.cta-btn-sec{font-size:12px;padding:8px 18px;border:0.5px solid #FF1493;border-radius:var(--border-radius-md);background:transparent;color:#FF1493;cursor:pointer;}
+
+.footer{background:var(--color-background-secondary);padding:28px 24px 16px;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px;margin-bottom:20px;}
+.footer-logo{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:7px;}
+.footer-logo span{color:#FF1493;}
+.footer-tagline{font-size:11px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:10px;}
+.footer-slogan{font-size:11px;color:var(--color-text-tertiary);font-style:italic;}
+.footer-col-title{font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
+.footer-link{font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:5px;text-decoration:none;cursor:pointer;}
+.footer-link:hover{color:#FF1493;}
+.footer-bottom{border-top:0.5px solid var(--color-border-tertiary);padding-top:12px;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:10px;color:var(--color-text-tertiary);}
+.footer-bottom-links{display:flex;gap:14px;}
+.footer-bottom-link{font-size:10px;color:var(--color-text-tertiary);text-decoration:none;cursor:pointer;}
+
+.signup-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;}
+.signup-modal[hidden]{display:none;}
+.signup-backdrop{position:absolute;inset:0;background:rgba(20,20,18,0.45);}
+.signup-dialog{position:relative;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:28px 28px 24px;width:100%;max-width:380px;box-shadow:0 12px 40px rgba(0,0,0,0.18);}
+.signup-close{position:absolute;top:10px;right:12px;width:28px;height:28px;background:transparent;border:none;color:var(--color-text-tertiary);font-size:22px;line-height:1;cursor:pointer;}
+.signup-close:hover{color:var(--color-text-primary);}
+.signup-eyebrow{font-size:10px;color:#FF1493;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:500;}
+.signup-title{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;}
+.signup-sub{font-size:12px;color:var(--color-text-secondary);margin-bottom:18px;line-height:1.5;}
+.signup-form[hidden]{display:none;}
+.signup-form{display:flex;flex-direction:column;gap:12px;}
+.signup-field{display:flex;flex-direction:column;gap:4px;}
+.signup-field span{font-size:11px;color:var(--color-text-secondary);}
+.signup-field input,.signup-field select{font:inherit;font-size:13px;padding:8px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);}
+.signup-field input:focus,.signup-field select:focus{outline:none;border-color:#FF1493;box-shadow:0 0 0 3px rgba(255,20,147,0.25);}
+.signup-submit{margin-top:6px;font-size:13px;padding:9px 16px;border:none;border-radius:var(--border-radius-md);background:#FF1493;color:white;cursor:pointer;font-weight:500;}
+.signup-submit:hover{background:#FF1493;}
+.signup-success[hidden]{display:none;}
+.signup-success{text-align:center;padding:12px 0;}
+.signup-success-mark{font-size:32px;color:#1D9E75;margin-bottom:8px;line-height:1;}
+.signup-success-title{font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;}
+.signup-success-msg{font-size:12px;color:var(--color-text-secondary);line-height:1.5;}
+.signup-success-chapter{color:var(--color-text-primary);font-weight:500;}
+
+.chapter-picker{max-width:560px;margin:0 auto;}
+.chapter-picker-trigger{display:flex;align-items:center;gap:14px;width:100%;padding:16px 20px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);color:var(--color-text-primary);cursor:pointer;font:inherit;font-size:15px;font-weight:500;text-align:left;}
+.chapter-picker-trigger:hover{background:rgba(255,255,255,0.03);border-color:var(--color-border-secondary);}
+.chapter-picker-trigger[aria-expanded="true"]{border-bottom-color:transparent;border-bottom-left-radius:0;border-bottom-right-radius:0;}
+.chapter-picker-trigger[aria-expanded="true"] .chapter-picker-arrow{transform:rotate(90deg);}
+.chapter-picker-arrow{font-size:10px;color:var(--color-text-tertiary);transition:transform 0.15s ease;width:12px;display:inline-block;flex-shrink:0;}
+.chapter-picker-title{flex:1;}
+.chapter-picker-meta{font-size:11px;color:var(--color-text-tertiary);font-weight:400;}
+.chapter-dropdown{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);overflow:hidden;background:var(--color-background-primary);max-width:560px;margin:0 auto;}
+.chapter-dropdown[hidden]{display:none;}
+.chapter-picker .chapter-dropdown{max-width:none;margin:0;border-top:none;border-top-left-radius:0;border-top-right-radius:0;}
+.state-header{display:flex;align-items:center;gap:12px;width:100%;padding:13px 18px;background:transparent;border:none;border-top:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);cursor:pointer;font:inherit;font-size:14px;font-weight:500;text-align:left;}
+.state-header:first-child{border-top:none;}
+.state-header:hover{background:rgba(255,255,255,0.03);}
+.state-arrow{font-size:9px;color:var(--color-text-tertiary);transition:transform 0.15s ease;width:10px;display:inline-block;}
+.state-header[aria-expanded="true"] .state-arrow{transform:rotate(90deg);}
+.state-name{flex:1;}
+.state-meta{font-size:11px;color:var(--color-text-tertiary);font-weight:400;}
+.state-cities{background:rgba(0,0,0,0.2);border-top:0.5px solid var(--color-border-tertiary);padding:4px 0 8px;}
+.state-cities[hidden]{display:none;}
+.city-item{display:flex;align-items:center;gap:10px;width:100%;padding:8px 18px 8px 42px;background:transparent;border:none;color:var(--color-text-primary);cursor:pointer;font:inherit;font-size:13px;text-align:left;}
+.city-item:hover{background:rgba(255,255,255,0.05);}
+.city-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.city-active .city-dot{background:#FF6EB4;box-shadow:0 0 0 3px rgba(255,110,180,0.3);}
+.city-available .city-dot{background:#1D9E75;box-shadow:0 0 0 3px rgba(29,158,117,0.15);}
+.city-label{flex:1;}
+.city-status{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;}
+.city-active .city-status{color:#FF6EB4;}
+.city-available .city-status{color:#1D9E75;}
+.signup-dialog-wide{max-width:480px;}
+.signup-row{display:flex;gap:12px;}
+.signup-row .signup-field{flex:1;}
+.signup-actions{display:flex;gap:10px;align-items:stretch;margin-top:6px;}
+.signup-actions .signup-submit{flex:1;margin-top:0;}
+.signup-discord{font-size:12px;padding:9px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:#5865F2;cursor:pointer;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+.signup-discord:hover{border-color:#5865F2;background:#F2F3FE;}
+.signup-field textarea{font:inherit;font-size:13px;padding:8px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);resize:vertical;min-height:64px;}
+.signup-field textarea:focus{outline:none;border-color:#FF1493;box-shadow:0 0 0 3px rgba(255,20,147,0.25);}
+</style>
+
+<div class="page">
+
+  <div class="nav">
+    <a class="nav-logo" href="ai_mondays_homepage_v2.html"><img class="nav-logo-img" src="ai-mondays-7538112.webp" alt="AI Mondays"></a>
+    <div class="nav-links">
+      <a class="nav-link active" href="ai_mondays_homepage_v2.html">Home</a>
+      <a class="nav-link" href="#">Events</a>
+      <a class="nav-link" href="ai_mondays_directory_v2.html">Chapters</a>
+      <a class="nav-link" href="ai_mondays_tools_directory.html">Tools</a>
+      <a class="nav-link" href="ai_mondays_teachers_directory.html">Teachers</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn-secondary">sign in</button>
+      <button class="btn-primary" data-open-join>Join free</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">the global ai education movement</div>
+    <div class="hero-title">Every Monday, learn how AI stops being <span>confusing</span> and starts being <span>useful</span></div>
+    <div class="hero-sub">Weekly Monday-night events on Discord, with community chapters expanding across the globe — starting in Utah.</div>
+    <div class="hero-btns-row1">
+      <button class="hbtn-join" data-open-join>Join AI Mondays Free</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title" style="color:#FF1493;">On Demand Events</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title" style="color:#FF1493;">The Big Event</div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <div>
+      <div class="cta-title">Ready to lead the AI movement in your city or university?</div>
+      <div class="cta-sub">Chapter leader spots are limited. Founding chapters available now at a special rate.</div>
+    </div>
+    <div class="cta-actions">
+      <button class="cta-btn-main" onclick="window.location.href='ai_mondays_directory_v2.html'">Become a chapter leader</button>
+      <button class="cta-btn-sec">learn more</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo"><span>AI</span> Mondays</div>
+        <div class="footer-tagline">A global community and movement focused on advancing the use of artificial intelligence for good. Weekly events, vetted tools, expert teachers, and chapters worldwide.</div>
+        <div class="footer-slogan">"Learn AI on Monday, use it Tuesday."</div>
+      </div>
+      <div>
+        <div class="footer-col-title">explore</div>
+        <a class="footer-link" href="#">events</a>
+        <a class="footer-link" href="#">chapters</a>
+        <a class="footer-link" href="#">tools directory</a>
+        <a class="footer-link" href="#">teachers directory</a>
+        <a class="footer-link" href="#">search</a>
+      </div>
+      <div>
+        <div class="footer-col-title">community</div>
+        <a class="footer-link" href="#">Join free</a>
+        <a class="footer-link" href="#">B6ecome a chapter leader</a>
+        <a class="footer-link" href="#">apply to teach</a>
+        <a class="footer-link" href="#">advertise a tool</a>
+        <a class="footer-link" href="#">referral program</a>
+      </div>
+      <div>
+        <div class="footer-col-title">company</div>
+        <a class="footer-link" href="#">about us</a>
+        <a class="footer-link" href="#">our mission</a>
+        <a class="footer-link" href="#">contact</a>
+        <a class="footer-link" href="#">privacy policy</a>
+        <a class="footer-link" href="#">terms of service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">AI Mondays &copy; 2025. All rights reserved. Not available in Denmark or Germany.</div>
+      <div class="footer-bottom-links">
+        <a class="footer-bottom-link" href="#">privacy</a>
+        <a class="footer-bottom-link" href="#">terms</a>
+        <a class="footer-bottom-link" href="#">sitemap</a>
+        <a class="footer-bottom-link" href="#">discord</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="join-modal" class="signup-modal" hidden>
+  <div class="signup-backdrop" data-close></div>
+  <div class="signup-dialog" role="dialog" aria-modal="true">
+    <button class="signup-close" type="button" data-close aria-label="close">&times;</button>
+    <h3 class="signup-title">Utah-Lehi</h3>
+    <p class="signup-sub">Free to join. You'll get the weekly Monday-night event invite and access to the chapter Discord.</p>
+    <form class="signup-form">
+      <label class="signup-field"><span>Name</span><input type="text" name="name" required autocomplete="name"></label>
+      <label class="signup-field"><span>Company Name</span><input type="text" name="company" autocomplete="organization"></label>
+      <label class="signup-field"><span>Email</span><input type="email" name="email" required autocomplete="email"></label>
+      <label class="signup-field"><span>Phone Number</span><input type="tel" name="phone" required autocomplete="tel"></label>
+      <label class="signup-field"><span>Your Experience</span>
+        <select name="level">
+          <option value="new">new to AI</option>
+          <option value="casual">I use AI casually</option>
+          <option value="builder">I build with AI</option>
+        </select>
+      </label>
+      <div class="signup-actions">
+        <button class="signup-submit" type="submit">Join Chapter</button>
+      </div>
+    </form>
+    <div class="signup-success" hidden>
+      <div class="signup-success-mark">&#10003;</div>
+      <div class="signup-success-title">you're in!</div>
+      <div class="signup-success-msg">Look for an email from the <span class="signup-success-chapter">Utah-Lehi</span> chapter leader within a few days.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var joinModal = document.getElementById('join-modal');
+  var form = joinModal.querySelector('.signup-form');
+  var success = joinModal.querySelector('.signup-success');
+
+  function openModal() {
+    form.reset();
+    form.hidden = false;
+    success.hidden = true;
+    joinModal.hidden = false;
+    setTimeout(function () {
+      var first = form.querySelector('input, textarea, select');
+      if (first) first.focus();
+    }, 50);
+  }
+
+  var triggers = document.querySelectorAll('[data-open-join]');
+  for (var i = 0; i < triggers.length; i++) {
+    triggers[i].addEventListener('click', openModal);
+  }
+
+  joinModal.addEventListener('click', function (e) {
+    if (e.target.hasAttribute && e.target.hasAttribute('data-close')) joinModal.hidden = true;
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    form.hidden = true;
+    success.hidden = false;
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !joinModal.hidden) joinModal.hidden = true;
+  });
+})();
+</script>
+
+</body>
+</html>
+
